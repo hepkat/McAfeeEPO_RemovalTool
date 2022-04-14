@@ -23,7 +23,7 @@ IfExist C:\Program Files\McAfee\Endpoint Security\Endpoint Security Platform\Rep
 {
 
 ;If it is, start at the top of products to uninstall, the first being McAfee Agent
-;Uninstall McAfee Agent
+;Uninstall McAfee Agent x64_OS
 IfExist C:\Program Files\McAfee\Agent\x86\FrmInst.exe
 {
 	Run, C:\Program Files\McAfee\Agent\x86\FrmInst.exe /forceuninstall /silent ;Uninstalls McAfee Agent.
@@ -38,6 +38,23 @@ While FileExist("C:\Program Files\McAfee\Agent\x86\FrmInst.exe")
 	Sleep, 5000 ;wait 5 seconds
 }
 until !FileExist("C:\Program Files\McAfee\Agent\x86\FrmInst.exe")
+
+;Uninstall McAfee Agent x86_OS
+IfExist C:\Program Files\McAfee\Agent\FrmInst.exe
+{
+	Run, C:\Program Files\McAfee\Agent\FrmInst.exe /forceuninstall /silent ;Uninstalls McAfee Agent.
+}
+else {
+	; Do nothing.
+}
+
+Loop
+While FileExist("C:\Program Files\McAfee\Agent\FrmInst.exe")
+{
+	Sleep, 5000 ;wait 5 seconds
+}
+until !FileExist("C:\Program Files\McAfee\Agent\FrmInst.exe")
+
 {
 WinWaitClose, ahk_exe c:\windows\system32\msiexec.exe
 ;Uninstall McAfee Web Control for x64 systems.
